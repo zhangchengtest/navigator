@@ -32,6 +32,49 @@
             }();
         </script> -->
         <link rel="stylesheet" href="/css/style.css">
+        <style>
+
+          /* 隐藏模态框 */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 99; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+/* 模态框内容 */
+.modal-content {
+    text-align: center;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  background-color: #fefefe;
+}
+
+/* 关闭按钮 */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+        </style>
     </head>
 
 <body data-new-gr-c-s-check-loaded="14.980.0">
@@ -84,10 +127,10 @@
                 <div class="row dh">
                     <div class="col-sm-6 col-md-4 mb-3 dh">
                         <div class="row">
-                            <div class="col-xs-12"><strong class="dhname" id="1">浙大 · 常用</strong></div>
+                            <div class="col-xs-12"><strong class="dhname" id="1">医疗 · 常用</strong></div>
 
-                            <div class="col-xs-4 mb-2"><a href="https://www.cc98.org/" 
-                                target="_blank"><img src="/images/CC98.ico">CC98</a></div>
+                            <div class="col-xs-4 mb-2"><a href="javascript:void(0);" 
+                                class="qr-link" data-qr-url="http://weixin.qq.com/r/MXREXNPE-I6DrZc-9yEj">湘雅医院</a></div>
 
                             <div class="col-xs-4 mb-2"><a href="http://www.nexushd.org/"
                                 target="_blank"><img src="/images/NHD.ico">NexusHD</a></div>
@@ -419,10 +462,53 @@
             </div>
         </div>
     </div>
+
+    <!-- 模态框 -->
+<div id="modal" class="modal">
+   
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div id="qr-name"></div>
+            <img id="qr-image" src=""/>
+            <div>长按二维码</div>
+        </div>
+    </div>
+  
+  </div>
+
+
     <footer class="footer text-center bg-white">
         <div class="container"><span id="hitokoto"></span></div>
     </footer>
     <script src="/js/main.js"></script>
 </body>
+
+<script>
+    $(document).ready(function() {
+  // 给所有具有 .qr-link 类的链接绑定点击事件
+  $('.qr-link').click(function() {
+    
+    // 获取链接上的 data-qr-url 属性值
+    var qrUrl = $(this).data('qr-url');
+
+    // 发送 GET 请求获得二进制流
+
+    $('#qr-image').attr('src', "http://192.168.65.83:8080/qrcode/one?url="+qrUrl);
+        $('#modal').show();
+      
+        
+  });
+
+  // 给模态框中的关闭按钮绑定点击事件
+  $('#modal .close').click(function() {
+    // 关闭模态框
+    $('#modal').hide();
+  });
+});
+
+</script>
 
 </html>
