@@ -1,5 +1,9 @@
 ssh root@13.228.240.187
 
+cd /ROOT/navigator/
+
+git pull
+
 cd D:\vipMusic\
 
 
